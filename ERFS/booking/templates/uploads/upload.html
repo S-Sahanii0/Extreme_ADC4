@@ -1,0 +1,9 @@
+{% block content %}
+    <h1>Upload your asset image</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <input type="file" name="document">
+        <button type="submit">Upload</button>
+    </form>
+{% endblock %}
