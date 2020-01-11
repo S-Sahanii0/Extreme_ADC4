@@ -5,10 +5,10 @@ from endUser.models import Buyer,Seller
 # Create your views here.
 
 def index(request):
-    return render(request=request,template_name="main/index.html",)
+    return render(request,template_name="main/index.html")
 
 def register(request):
-    return HttpResponse("hello register")
+        return  render(request,template_name="main/register.html")
 
 def login(request):
     return HttpResponse("hello login")

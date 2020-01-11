@@ -1,0 +1,15 @@
+{% extends "main/index.html" %}
+{% block content %}
+<body>
+    <input action="register" method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="FULL NAME"></input><br>
+        <input type="text" name="address" placeholder="ADDRESS"></input><br>
+        <input type="number" name="contact" placeholder="CONTACT"></input><br>
+        <input type="password" name="password1" placeholder="PASSWORD"></input><br>
+        <input type="password" name="password2" placeholder="CONFIRM PASSWORD"></input><br>
+        <input type="submit"></input>
+
+    </form>
+</body>
+{% endblock %}
