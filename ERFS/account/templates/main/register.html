@@ -1,15 +1,10 @@
 {% extends "main/index.html" %}
 {% block content %}
 <body>
-    <input action="register" method="POST">
+    <form  method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="text" name="name" placeholder="FULL NAME"></input><br>
-        <input type="text" name="address" placeholder="ADDRESS"></input><br>
-        <input type="number" name="contact" placeholder="CONTACT"></input><br>
-        <input type="password" name="password1" placeholder="PASSWORD"></input><br>
-        <input type="password" name="password2" placeholder="CONFIRM PASSWORD"></input><br>
-        <input type="submit"></input>
-
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary btn-sm">Register</button>
     </form>
 </body>
 {% endblock %}
