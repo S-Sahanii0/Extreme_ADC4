@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .forms import RegistrationForm
+from .forms import RegistrationFormB
 from endUser.models import Buyer,Seller
 
 # Create your views here.
@@ -8,16 +8,26 @@ from endUser.models import Buyer,Seller
 def index(request):
     return render(request,template_name="main/index.html")
 
-def register(request):
+def registerB(request):
     if request.method=="POST":
-        form=RegistrationForm(request.POST)
+        form=RegistrationFormB(request.POST)
         if form.is_valid():
             form.save()
             return redirect('account:index')
     else:
-        form=RegistrationForm()
+        form=RegistrationFormB()
     return  render(request,"main/register.html", {"form":form})
 
+
+def registerS(request):
+    if request.method=="POST":
+        form=RegistrationFormS(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('account:index')
+    else:
+        form=RegistrationFormS()
+    return  render(request,"main/register.html", {"form":form})
 def login(request):
     return HttpResponse("hello login")
 
