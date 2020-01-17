@@ -1,0 +1,13 @@
+{% extends "main/index.html" %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2>Login As Seller</h2>
+
+    {% if error %}
+    <h3>{{error}}</h3>
+    {% endif %}
+    {{form3.as_p}}
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+  {% endblock %}

@@ -8,6 +8,9 @@ urlpatterns = [
  path('',views.index,name="index"),  
  path('registerB/',views.registerB,name="registerB"),
  path('registerS/',views.registerS,name="registerS"),
- path('login/',views.login,name="login"),
+ path('loginB/',views.loginB,name="loginB"),
+ path('loginS/',views.loginS,name="loginS"),
  path('logout/',views.logout,name="logout"),
+ path('book/',views.book,name="book"),
+ path('upload/',views.upload,name="upload"),
 ]
