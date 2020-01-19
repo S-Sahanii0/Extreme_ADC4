@@ -3,8 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse
 from .forms import RegistrationFormB
 from .forms1 import RegistrationFormS
-from .forms2 import LoginFormB
-from .forms3 import LoginFormS
+from django.contrib.auth.forms import AuthenticationForm
 from endUser.models import Buyer,Seller
 
 # Create your views here.
@@ -43,9 +42,9 @@ def registerS(request):
 
 def loginB(request):
     if request.method=='POST':
-        form2=LoginFormB()
-        username2 =request.POST['username']
-        password2 =request.POST['password']
+        f2=AuthenticationForm(request.POST)
+        username2 =f2.data.get['username']
+        password2 =f2.data.get['password']
         buyer= authenticate(username=username2,confirm_password=password2)
         if buyer is None:
             return render(request,"main/loginB.html",{'error':"Invalid Username and Password."})
@@ -54,15 +53,15 @@ def loginB(request):
             return redirect('account:book')
             
     else:
-        form2=LoginFormB()
-        return render(request,"main/loginB.html",{"form2":form2})
+        f2=AuthenticationForm()
+        return render(request,"main/loginB.html",{"f2":f2})
 
 
 def loginS(request):
     if request.method=='POST':
-        form3=LoginFormS()
-        username3=request.POST['username']
-        password3 =request.POST['password']
+        f3=AuthenticationForm(request.POST)
+        username3=f3.cleaned_data['username']
+        password3 =f3.cleaned_data['password']
         seller= authenticate(username=username3,confirm_password=password3)
         if seller is None:
             return render(request,"main/loginS.html",{'error':"Invalid Username and Password."})
@@ -71,8 +70,8 @@ def loginS(request):
             return redirect('account:upload')
             
     else:
-        form3=LoginFormS()
-        return render(request,"main/loginS.html",{"form3":form3})
+        f3=AuthenticationForm()
+        return render(request,"main/loginS.html",{"f3":f3})
 
 
 
