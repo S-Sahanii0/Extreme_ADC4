@@ -5,6 +5,8 @@ from .forms import RegistrationFormB
 from .forms1 import RegistrationFormS
 from django.contrib.auth.forms import AuthenticationForm
 from endUser.models import Buyer,Seller
+from django import forms
+from django.contrib import messages
 
 # Create your views here.
 
@@ -43,15 +45,19 @@ def registerS(request):
 def loginB(request):
     if request.method=='POST':
         f2=AuthenticationForm(request.POST)
-        username2 =f2.data.get['username']
-        password2 =f2.data.get['password']
-        buyer= authenticate(username=username2,confirm_password=password2)
-        if buyer is None:
-            return render(request,"main/loginB.html",{'error':"Invalid Username and Password."})
+        if f2.is_valid():
+            username2=f2.cleaned_data.get['username']
+            password2=f2.cleaned_data.get['password']
+            buyer= authenticate(username=username2,password=password2)
+            if buyer is not None:
+                login(request,buyer)
+                return redirect('account:book')
+                
+            else:
+                return render(request,"main/loginB.html",{'error':"Invalid Username and Password."})
         else:
-            login(request,buyer)
-            return redirect('account:book')
-            
+           return render(request,"main/loginB.html",{'error':"Invalid Username and Password."})
+            #return redirect('account:book')
     else:
         f2=AuthenticationForm()
         return render(request,"main/loginB.html",{"f2":f2})
