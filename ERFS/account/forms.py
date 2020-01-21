@@ -1,10 +1,10 @@
 from django import forms
-from endUser.models import Buyer
+from endUser.models import EndUser
 
-class RegistrationFormB(forms.ModelForm):
+class RegistrationForm(forms.ModelForm):
     class Meta:
-        model= Buyer
-        fields=('username','buyer_Name','buyer_Contact','buyer_Address','password','confirm_password')
+        model= EndUser
+        fields=('username','Name','Contact','Address','password','confirm_password')
 
        
 
