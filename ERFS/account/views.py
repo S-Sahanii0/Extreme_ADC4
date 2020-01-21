@@ -5,6 +5,7 @@ from .forms import RegistrationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from django.contrib import messages
+from django.contrib import auth
 
 # Create your views here.
 
@@ -15,20 +16,35 @@ def userregister(request):
     if request.method == 'POST':
         formr = RegistrationForm(data=request.POST)
         if formr.is_valid():
-            user = formr.save()
+            user=formr.save()
             user.save()
-            return redirect('account:sucess')
+        
+            #username=formr.cleaned_data.get('username')
+            #password=formr.cleaned_data.get('password')
+            #user=authenticate(username=username,password=password)
+            #login(request,user)
+            return redirect('account:userlogin')
     else:
         formr = RegistrationForm()
         return render(request, "main/userregister.html", {"formr":formr})
 
 
 def userlogin(request):
-    pass
+    if request.method=='POST':
+        usernam = request.POST['username']
+        passwor = request.POST['password']
+        user = auth.authenticate(request,username=usernam,password=passwor)
+        if user is not None:
+            auth.login(request,user)
+            return redirect('account:sucess')
+            
+        else:
+            return HttpResponse("Wrong CRedintials")
+    
+    else:
+        return render(request, "main/userlogin.html")
 
-
-
-
+            
 def sucess(request):
     return render(request,"main/sucess.html",{"sucess":sucess})
 
