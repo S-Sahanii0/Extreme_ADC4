@@ -1,10 +1,11 @@
 from django import forms
-from endUser.models import EndUser
+from django.contrib.auth.models import User
 
 class RegistrationForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
     class Meta:
-        model= EndUser
-        fields=('username','Name','Contact','Address','password','confirm_password')
+        model=User
+        fields=('username','first_name','last_name','Address','password','confirm_password')
 
        
 
