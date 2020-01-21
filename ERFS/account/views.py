@@ -48,12 +48,15 @@ def loginB(request):
         if f2.is_valid():
             username2=f2.cleaned_data.get('username')
             password2=f2.cleaned_data.get('password')
-            buyer= authenticate(request,username=username2,password=password2)
+            buyer= authenticate(username=username2,password=password2)
             if buyer is not None:
                     login(request,buyer)
                     return redirect('account:book')
                 
         else:
+            username2=f2.cleaned_data.get('username')
+            password2=f2.cleaned_data.get('password')
+            print(username2)
             return render(request,"main/loginB.html",{'error':"Invalid Username and Password."})
             
     else:
