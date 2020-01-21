@@ -17,8 +17,10 @@ def userregister(request):
         if formr.is_valid():
             user = formr.save()
             user.save()
+            return redirect('account:sucess')
     else:
         formr = RegistrationForm()
+        return render(request, "main/userregister.html", {"formr":formr})
 
 
 def userlogin(request):
