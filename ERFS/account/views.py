@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from django.contrib import messages
 from django.contrib import auth
-
+from django.contrib.auth.models import User
 # Create your views here.
 
 def index(request):
@@ -17,13 +17,13 @@ def userregister(request):
         formr = RegistrationForm(data=request.POST)
         if formr.is_valid():
             user=formr.save()
+            user.set_password(user.password)
             user.save()
-        
-            #username=formr.cleaned_data.get('username')
-            #password=formr.cleaned_data.get('password')
-            #user=authenticate(username=username,password=password)
-            #login(request,user)
-            return redirect('account:userlogin')
+            username=formr.cleaned_data.get('username')
+            password=formr.cleaned_data.get('password')
+            user=authenticate(username=username,password=password)
+            login(request,user)
+            return redirect('account:sucess')
     else:
         formr = RegistrationForm()
         return render(request, "main/userregister.html", {"formr":formr})
