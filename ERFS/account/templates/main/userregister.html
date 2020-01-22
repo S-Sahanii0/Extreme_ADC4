@@ -7,6 +7,10 @@
         <h5 style="color: red;">{{error}}</h5>
         {% endif %}
         {{formr.as_p}}
+
+        <p> <a href="{% url 'account:userregister' %}">Click here</a> to Register again.</p>
+        
+
         <button type="submit" class="btn btn-success">Register</button>
     </form>
 </body>

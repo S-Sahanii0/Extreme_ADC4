@@ -33,9 +33,13 @@
         Account
       </a>
       <div class="dropdown-menu">
+        {% if user.is_authenticated %}
+        <a class="dropdown-item" href="/userlogout">Logout</a>
+
+        {% else %}
         <a class="dropdown-item" href="/userregister">Register</a>
         <a class="dropdown-item" href="/userlogin">Login</a>
-        <a class="dropdown-item" href="/userlogout">Logout</a>
+       {% endif %}
       </div>
     </li>
   </ul>
