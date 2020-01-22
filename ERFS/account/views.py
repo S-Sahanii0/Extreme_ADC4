@@ -24,6 +24,10 @@ def userregister(request):
             user=authenticate(username=username,password=password)
             login(request,user)
             return redirect('account:sucess')
+        else:
+            
+            return render(request, "main/userregister.html",{'error':"Given Username is Already Taken.Please Try Another."})
+            
     else:
         formr = RegistrationForm()
         return render(request, "main/userregister.html", {"formr":formr})
@@ -39,12 +43,19 @@ def userlogin(request):
             return redirect('account:sucess')
             
         else:
-            return HttpResponse("Wrong CRedintials")
-    
+            return render(request, "main/userlogin.html",{'error':"Worng Username and Password"})
     else:
         return render(request, "main/userlogin.html")
+
+def userlogout(request):
+    logout(request)
+    return render(request,"main/userlogout.html",{"userlogout":userlogout})
 
             
 def sucess(request):
     return render(request,"main/sucess.html",{"sucess":sucess})
+
+
+
+
 

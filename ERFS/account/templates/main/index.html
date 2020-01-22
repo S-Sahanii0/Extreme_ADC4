@@ -1,33 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>EasyRoom</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">EasyRoom</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">For Rent</a></li>
-      <li><a href="#">For Sale</a></li>
-      <li><a href="/logout">Logout</a></li>
-      <li><a href="userregister">Register</a></li>
-      <li><a href="/userlogin">Login</a></li>
-        </ul>
-  </div>
+<nav style="height:70px;" class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+  <a style="font-size:200%;" class="navbar-brand" href="#">EasyRoom</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a style="font-size:20px;" class="nav-link" href="#">Home</a>
+    </li>
+    <li class="nav-item">
+      <a style="font-size:20px;" class="nav-link" href="#">For Rent</a>
+    </li>
+    <li class="nav-item">
+      <a  style="font-size:20px;" class="nav-link" href="#">For Sale</a>
+    </li>
+
+    <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a style="font-size:20px;" class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Account
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="/userregister">Register</a>
+        <a class="dropdown-item" href="/userlogin">Login</a>
+        <a class="dropdown-item" href="/userlogout">Logout</a>
+      </div>
+    </li>
+  </ul>
+  <form  style="position: absolute; right:10px;" class="form-inline" action="/action_page.php">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+    <button class="btn btn-success" type="submit">Search</button>
+  </form>
 </nav>
+
+
 </body>
 </html>
-
              
    {% block content %}
    {% endblock %}
