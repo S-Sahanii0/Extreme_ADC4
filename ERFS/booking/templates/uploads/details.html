@@ -1,0 +1,41 @@
+
+{% block content %}
+<p>
+    <a href="{% url 'booking:files' %}" class="btn btn-primary btn-sm">Upload</a>
+</p>
+
+{% if assets %}
+
+    
+    
+        {% for asset in assets %}
+        <p>
+            {{asset.asset_Title}}
+            <br>
+            {{asset.asset_Type}}
+            <br>
+            <img src="{{asset.asset_Image.url}}" height="400" width="400">
+            <a href="{{asset.asset_Image.url}}">Download</a>
+            
+            <form method="POST" action="{% url 'booking:delete_asset' asset.pk %}">
+                {% csrf_token %}
+                <button type= "submit" class="btn btn-primary">Delete</button>
+            </form>
+            <form method="GET" action="{% url 'booking:update_asset' asset.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Update</button></form>
+        {% endfor %}
+        </p>
+</table>
+{% else %}
+
+<div class="container">
+    <div class="row">
+        <div class="card-title">
+            <h1>No results</h1>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endblock %}
