@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+{% if userprofile %}
+
+<div>
+    <img src="{{{userprofile.picture.url}}" height="400" width="400"><br>
+    <P>Username: {{request.user.username}}</P><br>
+    <P>First Name: {{request.user.first_name}}</P><br>
+    <P>Last Name: {{request.user.last_name}}</P><br>
+    <P>Email: {{request.user.email}}</P><br>
+    <p>Bio: {{userprofile.bio}}</p>
+
+</div>
+
+
+
+{% endif %}
+{% endblock %}

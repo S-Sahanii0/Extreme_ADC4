@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<form  method="POST" enctype="multipart/form-data">
+    
+{% csrf_token %}
+{{formp.as_p}}
+
+<button type="submit" class="btn btn-success">Upload</button>
+
+</form>
+{% endblock %}

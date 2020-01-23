@@ -2,15 +2,17 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse
 from .forms import RegistrationForm
+from .profile import  profileForm
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from django.contrib import messages
 from django.contrib import auth
 from django.contrib.auth.models import User
+from .models import UserProfile
 # Create your views here.
 
 def index(request):
-    return render(request,template_name="main/index.html")
+    return render(request,template_name="index.html")
 
 def userregister(request):
     if request.method == 'POST':
@@ -54,6 +56,21 @@ def userlogout(request):
             
 def sucess(request):
     return render(request,"main/sucess.html",{"sucess":sucess})
+
+
+def uploadprofile(request):
+    if request.method== "POST":
+        formp = profileForm(request.FILES,request.POST)
+        if formp.is_valid():
+            formp.save()
+            return redirect('account:profile')
+    else:
+        formp = profileForm()
+    return render(request, "main/profilecreation.html", {"formp":formp})
+
+def viewprofile(request):
+    userprofile= UserProfile.objects.all()
+    return render(request, "main/profile.html",{"userprofile": userprofile})
 
 
 
