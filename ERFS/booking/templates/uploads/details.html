@@ -10,9 +10,17 @@
     
         {% for asset in assets %}
         <p>
-            {{asset.asset_Title}}
+            <b>Username:</b>{{asset.user.username}}
             <br>
-            {{asset.asset_Type}}
+            <b>Title:</b>{{asset.asset_Title}}
+            <br>
+            <b>Type:</b>{{asset.asset_Type}}
+            <br>
+            <b>Price:</b>{{asset.asset_Price}}
+            <br>
+            <b>Purpose:</b>{{asset.asset_purpose}}
+            <br>
+            <b>Location:</b>{{asset.asset_Location}}
             <br>
             <img src="{{asset.asset_Image.url}}" height="400" width="400">
             <a href="{{asset.asset_Image.url}}">Download</a>
