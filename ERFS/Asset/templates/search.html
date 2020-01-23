@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+     <!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Easy Room</title>
+    <style>
+       
+       * {box-sizing: border-box;}
+
+ input[type=text] {
+  padding: 16x;
+  margin-bottom: 1s0px;
+  font-size: 30px;
+  border: none;
+}
+
+ .search-container button {
+  
+  padding: 10px 10px;
+  margin-top: 60px;
+  margin-right: 10px;
+  margin-left: 650px;
+  background: #ddd;
+  font-size: 35px;
+  border: none;
+  cursor: pointer;
+  size: 30px;
+}
+
+.search-container button:hover {
+  background: #ccc;
+}
+    </style>
+</head>
+<body>
+    
+    {% extends "navigation.html" %}
+    {% block content %} 
+    
+<h1 style="text-align: center;">Search</h1>
+    <div class="search-container">
+        <form method="post" action="/search/">
+          {% csrf_token %}
+          <input type="text" placeholder="Search.." name="srh">
+          <button type="submit" value="Search"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+
+      <div>
+        {% if messages %}
+        <ul class="messages">
+          {% for k in messages %}
+          <li style="color: red;">{{ k }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div><br>
+
+      {% if sr %}
+      {% for k in sr %}
+      <table border="0px" width="300px">
+          <tr>
+                <td>Property Title</td>
+                <td>{{k.asset_Title}}</td>
+          </tr>
+          <tr>
+            <td>Property Type</td>
+            <td>{{k.asset_Type}}</td>
+            </tr>
+            <tr>
+                <td>Property Price</td>
+                <td>{{k.asset_Price}}</td>
+          </tr>
+          <tr>
+            <td>Property Purpose</td>
+            <td>{{k.asset_purpose}}</td>
+            </tr>
+            <tr>
+                <td>Property Location</td>
+                <td>{{k.asset_Location}}</td>
+          </tr>
+          <tr>
+            <td>Property Image</td>
+            <td>{{k.asset_Image}}</td>
+            </tr>
+            <br><br><br>
+        
+      </table>
+      {% endfor %}
+      {% endif %}{% endblock %}
+</body>
+</html>
