@@ -31,6 +31,10 @@ def delete_asset(request, pk= None):
     asset.delete()
     return redirect('booking:display')
 
-
+#def fav_list(request,id):
+    #asset = get_object_or_404(Asset, id=id)
+    #if request.method == 'POST':
+        #asset.favourite.add(request.user)
+    #return render(request, "uploads/details.html", {"assets": asset})
 # Create your views here.
 
