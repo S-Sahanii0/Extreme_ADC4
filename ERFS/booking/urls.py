@@ -11,4 +11,6 @@ urlpatterns=[
     path('booking', views.display, name="display"),
     path('booking/delete/<int:pk>/', views.delete_asset, name="delete_asset"),
     path('booking/update/<int:id>/', views.update_asset, name="update_asset" ),
+    path('booking/favorites/<int:id>/', views.update_asset, name="fav_list" ),
+    
 ]

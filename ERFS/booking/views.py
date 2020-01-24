@@ -37,4 +37,3 @@ def delete_asset(request, pk= None):
         #asset.favourite.add(request.user)
     #return render(request, "uploads/details.html", {"assets": asset})
 # Create your views here.
-

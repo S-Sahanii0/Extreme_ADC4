@@ -33,6 +33,9 @@
                 {% csrf_token %}
                 <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Update</button></form></div>
             <br></div>
+            <div><form method="GET" action="{% url 'booking:fav_list' asset.pk %}">
+                {% csrf_token %}
+                <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Add to Fav</button></form></div>
             <a href="{{asset.asset_Image.url}}">Download</a>
             
              
