@@ -59,13 +59,12 @@ def sucess(request):
 
 
 def uploadprofile(request):
+    formp = profileForm()
     if request.method== "POST":
         formp = profileForm(request.FILES,request.POST)
         if formp.is_valid():
             formp.save()
-            return redirect('account:profile')
-    else:
-        formp = profileForm()
+        return redirect('account:viewprofile')
     return render(request, "main/profilecreation.html", {"formp":formp})
 
 def viewprofile(request):

@@ -2,19 +2,21 @@
 
 {% block content %}
 
-{% if userprofile %}
+{% if userprofiles %}
 
-<div>
-    <img src="{{{userprofile.picture.url}}" height="400" width="400"><br>
-    <P>Username: {{request.user.username}}</P><br>
-    <P>First Name: {{request.user.first_name}}</P><br>
-    <P>Last Name: {{request.user.last_name}}</P><br>
-    <P>Email: {{request.user.email}}</P><br>
+    {% for userprofile in userprofile %}
+
+    <div>
+    <img src="{{userprofile.picture.url}}" height="400" width="400"><br>
+    <P>Username: {{userprofile.user.username}}</P><br>
+    <P>First Name: {{userprofile.user.first_name}}</P><br>
+    <P>Last Name: {{userprofile.user.last_name}}</P><br>
+    <P>Email: {{userprofile.user.email}}</P><br>
     <p>Bio: {{userprofile.bio}}</p>
 
-</div>
+    </div>
 
-
+    {% endfor %}
 
 {% endif %}
 {% endblock %}

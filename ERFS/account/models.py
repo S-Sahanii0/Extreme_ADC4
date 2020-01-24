@@ -5,7 +5,7 @@ from django.contrib import admin
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to="profile/images/", blank=True)
+    picture = models.ImageField(upload_to="profile/images/")
     bio=models.TextField(max_length=100)
     
 
