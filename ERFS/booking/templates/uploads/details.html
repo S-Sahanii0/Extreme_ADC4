@@ -24,20 +24,18 @@
             <br>
             <img src="{{asset.asset_Image.url}}" height="400" width="400">
             <br>
+            <div>
+                <div><form method="POST" action="{% url 'booking:delete_asset' asset.pk %}">
+                {% csrf_token %}
+                <button style="position: relative; margin-left:50px;" type= "submit" class="btn btn-primary">Delete</button>
+            </form></div>
+                <div><form method="GET" action="{% url 'booking:update_asset' asset.pk %}">
+                {% csrf_token %}
+                <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Update</button></form></div>
+            <br></div>
             <a href="{{asset.asset_Image.url}}">Download</a>
             
-                <form method="POST" action="{% url 'booking:delete_asset' asset.pk %}">
-                {% csrf_token %}
-                <button type= "submit" class="btn btn-primary">Delete</button>
-            </form>
-                <th><form method="GET" action="{% url 'booking:update_asset' asset.pk %}">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-primary">Update</button></form>
-                <!--<form method='POST' action="{% url 'booking:fav_list' asset.id %}">
-                    {% csrf_token %}
-                    <input type='hidden' name='asset' value={{ asset.id }}>
-                    <button type='submit'>Add to Fav</button>
-                </form>-->
+             
         {% endfor %}
         </p>
 </table>
