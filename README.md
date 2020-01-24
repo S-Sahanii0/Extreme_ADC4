@@ -1,5 +1,5 @@
 # Extreme_ADC4
- This repository is create to do coursework.
+ This repository is created to do coursework.
 
 TEAM: EXTREME_ADC4
 
