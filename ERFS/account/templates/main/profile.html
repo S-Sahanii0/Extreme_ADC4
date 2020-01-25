@@ -1,22 +1,22 @@
 {% extends "index.html" %}
 
 {% block content %}
+<p>User Profile</p>
+ 
 
-{% if userprofiles %}
+        {% for u in userp %}
 
-    {% for userprofile in userprofile %}
+       
+            <img src="{{u.picture.url}}" height="400" width="400"><br>
+            <P> {{u.user.username}}</P><br>
+            <P>{{u.user.first_name}}</P><br>
+            <P>{{u.user.last_name}}</P><br>
+            <P>{{u.user.email}}</P><br>
+            <p>{{u.bio}}</p>
 
-    <div>
-    <img src="{{userprofile.picture.url}}" height="400" width="400"><br>
-    <P>Username: {{userprofile.user.username}}</P><br>
-    <P>First Name: {{userprofile.user.first_name}}</P><br>
-    <P>Last Name: {{userprofile.user.last_name}}</P><br>
-    <P>Email: {{userprofile.user.email}}</P><br>
-    <p>Bio: {{userprofile.bio}}</p>
+      
 
-    </div>
+        {% endfor %}
 
-    {% endfor %}
 
-{% endif %}
 {% endblock %}
