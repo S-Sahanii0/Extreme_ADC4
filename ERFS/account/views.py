@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import UserProfile
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
@@ -48,7 +49,7 @@ def userlogin(request):
             return render(request, "main/userlogin.html",{'error':"Worng Username and Password"})
     else:
         return render(request, "main/userlogin.html")
-
+@login_required
 def userlogout(request):
     logout(request)
     return render(request,"main/userlogout.html",{"userlogout":userlogout})
@@ -57,17 +58,19 @@ def userlogout(request):
 def sucess(request):
     return render(request,"main/sucess.html",{"sucess":sucess})
 
-
+@login_required
 def uploadprofile(request):
     if request.method== "POST":
-        formp = profileForm(request.POST,request.FILES,)
-        
-        formp.save()
-        return redirect('account:viewprofile')
+        formp = profileForm(request.POST,request.FILES)
+        if formp.is_valid():
+            profile=formp.save(commit=False)
+            profile.user=request.user
+            profile.save()
+            return redirect('account:viewprofile')
     else:
         formp = profileForm()
         return render(request, "main/profilecreation.html", {"formp":formp})
-
+@login_required
 def viewprofile(request):
     userp=UserProfile.objects.all()
     return render(request, "main/profile.html",{"userp": userp})

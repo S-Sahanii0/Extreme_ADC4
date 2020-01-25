@@ -2,21 +2,21 @@
 
 {% block content %}
 <p>User Profile</p>
- 
+{% if user.is_authenticated %}
 
         {% for u in userp %}
 
-       
+          
             <img src="{{u.picture.url}}" height="400" width="400"><br>
-            <P> {{u.user.username}}</P><br>
-            <P>{{u.user.first_name}}</P><br>
-            <P>{{u.user.last_name}}</P><br>
-            <P>{{u.user.email}}</P><br>
-            <p>{{u.bio}}</p>
-
+            <P>UserName: {{u.user.username}}</P><br>
+            <P>First name:{{u.user.first_name}}</P><br>
+            <P>Last Name:{{u.user.last_name}}</P><br>
+            <P>Email:{{u.user.email}}</P><br>
+            <p>Bio:{{u.bio}}</p>
+          
       
 
         {% endfor %}
-
+{% endif %}
 
 {% endblock %}

@@ -1,4 +1,6 @@
 {% extends "index.html" %}
 {% block content %}
 <h3>Welcome {{request.user.username}}</h3>
+<p> <a href="{% url 'account:uploadprofile' %}">Click here</a> to Set Profile</p>
+<p> <a href="{% url 'account:viewprofile' %}">Click here</a> to view Profile</p>
 {% endblock %}
