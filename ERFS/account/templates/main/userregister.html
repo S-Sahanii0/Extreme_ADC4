@@ -3,15 +3,16 @@
 <body>
     <form  method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+        <h2 style="text-align: center; margin-top:15px;">User Registration</h2>
         {% if error %}
-        <h5 style="color: red;">{{error}}</h5>
+        <h5 style="color: red; text-align: center;">{{error}}</h5>
         {% endif %}
-        {{formr.as_p}}
+       <table style="position: relative; left:790px;">{{formr.as_table}}</table>
 
-        <p> <a href="{% url 'account:userregister' %}">Click here</a> to Register again.</p>
+        <p style="text-align: center;"> <a href="{% url 'account:userregister' %}">Click here</a> to Register again.</p>
         
 
-        <button type="submit" class="btn btn-success">Register</button>
+        <button style="position: relative; left:920px;" type="submit" class="btn btn-success">Register</button>
     </form>
 </body>
 {% endblock %}
