@@ -57,6 +57,7 @@ def userlogout(request):
             
 def sucess(request):
     return render(request,"main/sucess.html",{"sucess":sucess})
+    
 
 @login_required
 def uploadprofile(request):
@@ -70,9 +71,12 @@ def uploadprofile(request):
     else:
         formp = profileForm()
         return render(request, "main/profilecreation.html", {"formp":formp})
+
+
+
 @login_required
 def viewprofile(request):
-    userp=UserProfile.objects.all()
+    userp=UserProfile.objects.get(user=request.user.id)
     return render(request, "main/profile.html",{"userp": userp})
 
 

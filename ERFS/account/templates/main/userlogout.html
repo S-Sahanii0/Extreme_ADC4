@@ -1,9 +1,15 @@
 {% extends "index.html" %}
 {% block content %}
 <div class="section-inner clearfix">
- 
-    <p>You are logged out. <a href="{% url 'account:userlogin' %}">Click here</a> to login again.</p>
-    <p> <a href="{% url 'account:viewprofile' %}">Click here</a> to view Profile</p>
+    <div>
+    <h3 style="margin-left:600px; margin-top: 10px;" >You are logged out.Thank You for spending your valueable Time. </h3>
+    </div>  
+
+    <div>
+    <a style="margin-left:850px; margin-top: 20px;" href="{% url 'account:userlogin' %}" class="btn btn-info"> Login Again</a>
+    </div>
+
+
 
 </div>
 {% endblock %}

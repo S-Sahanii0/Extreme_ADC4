@@ -2,21 +2,12 @@
 
 {% block content %}
 <p>User Profile</p>
-{% if user.is_authenticated %}
 
-        {% for u in userp %}
-
+            <img style="border-radius:50%;" src="{{userp.picture.url}}" height="400" width="400"><br>
+            <P>Username: {{userp.user.username}}</P><br>
+            <P>Name:{{userp.user.first_name}}    {{userp.user.last_name}}</P><br>
           
-            <img src="{{u.picture.url}}" height="400" width="400"><br>
-            <P>UserName: {{u.user.username}}</P><br>
-            <P>First name:{{u.user.first_name}}</P><br>
-            <P>Last Name:{{u.user.last_name}}</P><br>
-            <P>Email:{{u.user.email}}</P><br>
-            <p>Bio:{{u.bio}}</p>
+            <P>Email:{{userp.user.email}}</P><br>
+            <p>Bio:{{userp.bio}}</p>
           
-      
-
-        {% endfor %}
-{% endif %}
-
 {% endblock %}
