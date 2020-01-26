@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if assets %}    
+        {% for asset in assets %}
+            <b>Username:</b>{{asset.user.username}}
+            <br>
+            <b>Title:</b>{{asset.asset_Title}}
+            <br>
+            <b>Type:</b>{{asset.asset_Type}}
+            <br>
+            <b>Price:</b>{{asset.asset_Price}}
+            <br>
+            <b>Purpose:</b>{{asset.asset_purpose}}
+            <br>
+            <b>Location:</b>{{asset.asset_Location}}
+            <br>
+            <img src="{{asset.asset_Image.url}}" height="400" width="400">
+            <br>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+        
