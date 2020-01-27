@@ -64,7 +64,7 @@ def uploadprofile(request):
     if request.method== "POST":
         formp = profileForm(request.POST,request.FILES)
         if formp.is_valid():
-            p = UserProfile.objects.get(user_id=request.user.id)
+            p =UserProfile.objects.get(user_id=request.user.id)
             p.picture=formp.cleaned_data['picture']
             p.bio=formp.cleaned_data['bio']
             p.save()
@@ -80,10 +80,16 @@ def uploadprofile(request):
 
 @login_required
 def viewprofile(request):
-    userp=UserProfile.objects.get(user=request.user.id)
-    return render(request, "main/profile.html",{"userp": userp})
+    try:
+        userp=UserProfile.objects.get(user=request.user.id)
+        return render(request, "main/profile.html",{"userp": userp})
+
+    except:
+        return render(request, "main/sucess.html",{'error':"Profile is not Created"})
 
 
+
+    
 
 
 
