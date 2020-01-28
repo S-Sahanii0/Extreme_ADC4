@@ -40,6 +40,13 @@
             {% else %}
                 <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Added to Fav</button></div>
             {% endif %}
+            {% if is_available %}
+            <div><form method="POST" action="{% url 'booking:book_asset' asset.pk %}">
+                {% csrf_token %}
+                <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Book</button></form>
+            {% else %}
+                <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Booked</button></div>
+            {% endif %}
             <a href="{{asset.asset_Image.url}}">Download</a>
             
              
