@@ -67,3 +67,4 @@ def book_asset(request,pk):
         asset.save()
         messages.info(request, 'You have marked asset {} as available for booking'.format(asset.asset_id) )
     return redirect('booking:display')
+
