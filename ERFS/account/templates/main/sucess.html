@@ -1,9 +1,7 @@
 
 {% extends "index.html" %}
 {% block content %}
-
 {% load staticfiles %}
-
 <div>
 {% if user.is_authenticated %}
 <h3 style="margin-left:10px;">Welcome {{request.user.username}} !!!</h3>
