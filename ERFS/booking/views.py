@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from .models import Asset, Booking, AddToFav
+from .models import Asset,Booking, AddToFav
+from account.models import UserProfile
 from .forms import UploadForm
 from django.http import HttpResponse
 from django.contrib import messages
@@ -62,15 +63,16 @@ def book_asset(request,pk):
     asset = get_object_or_404(Asset, pk=pk)
     if asset.is_available:
         asset.is_available= False
+        asset.save()
         user= UserProfile.objects.get(user=request.user)
         booking_date = timezone.now()
         Booking.objects.create(user=user, booking_Date=booking_date, booking_Status ="Booked")
-        asset.save()
+        return redirect('booking:display')
 
-        messages.info(request, 'You have marked asset {} as booked!'.format(asset.asset_id))
+        #messages.info(request, 'You have marked asset {} as booked!'.format(asset.asset_id))
     else:
         asset.is_available = True
         asset.save()
-        messages.info(request, 'You have marked asset {} as available for booking'.format(asset.asset_id) )
-    return redirect('booking:display')
+        #messages.info(request, 'You have marked asset {} as available for booking'.format(asset.asset_id) )
+    
 
