@@ -47,7 +47,7 @@
     
 <h1 style="text-align: center;">Search</h1>
     <div class="search-container">
-        <form method="post" action="/search/">
+        <form method="post" action="/result/">
           {% csrf_token %}
           <input type="text" placeholder="Search.." name="srh">
           <button type="submit" value="Search"><i class="fa fa-search"></i></button>
