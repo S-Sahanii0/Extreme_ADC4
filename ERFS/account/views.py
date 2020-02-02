@@ -68,9 +68,9 @@ def uploadprofile(request):
             p.picture=formp.cleaned_data['picture']
             p.bio=formp.cleaned_data['bio']
             p.save()
-            #profile=formp.save(commit=False)
-            #profile.user=request.user
-            #profile.save()
+            # profile=formp.save(commit=False)
+            # profile.user=request.user
+            # profile.save()
             return redirect('account:viewprofile')
     else:
         formp = profileForm()
