@@ -37,12 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
-    'Asset'
-    
-=======
-    'account',
->>>>>>> master
+    'Asset',
+    'account'
 ]
 
 MIDDLEWARE = [

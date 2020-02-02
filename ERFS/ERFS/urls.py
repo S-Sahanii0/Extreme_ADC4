@@ -20,12 +20,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-<<<<<<< HEAD
     path('',include('Asset.urls')),
-=======
     path('',include('account.urls')),
     
->>>>>>> master
     path('admin/', admin.site.urls),
     
 ]
