@@ -64,7 +64,7 @@ def uploadprofile(request):
     if request.method== "POST":
         formp = profileForm(request.POST,request.FILES)
         if formp.is_valid():
-            p =UserProfile.objects.get(user_id=request.user.id)
+            p = UserProfile.objects.get(user_id=request.user.id)
             p.picture=formp.cleaned_data['picture']
             p.bio=formp.cleaned_data['bio']
             p.save()
