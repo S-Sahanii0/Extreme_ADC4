@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 class Asset(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
+    is_available=models.BooleanField(default=True)
     asset_Title=models.CharField(max_length=50)
     asset_Type=models.CharField(max_length=20)
     asset_Price=models.IntegerField()
@@ -12,10 +13,14 @@ class Asset(models.Model):
     def __str__(self):
         return self.asset_Title
 class Booking(models.Model):
+    STATUS =(
+        ('Available', 'Available'),
+        ('Booked', 'Booked'),
+    )
     asset=models.OneToOneField(Asset,on_delete=models.CASCADE)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
-    booking_Date=models.DateTimeField()
-    booking_Status= models.BooleanField()
+    booking_Date=models.DateTimeField(auto_now_add=True)
+    booking_Status= models.BooleanField(choices=STATUS)
     def __str__(self):
         return self.booking_Date
 class AddToFav(models.Model):

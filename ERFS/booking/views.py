@@ -3,6 +3,8 @@ from .models import Asset, Booking, AddToFav
 from .forms import UploadForm
 from django.http import HttpResponse
 from django.contrib import messages
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 def upload(request):
@@ -60,7 +62,11 @@ def book_asset(request,pk):
     asset = get_object_or_404(Asset, pk=pk)
     if asset.is_available:
         asset.is_available= False
+        user= UserProfile.objects.get(user=request.user)
+        booking_date = timezone.now()
+        Booking.objects.create(user=user, booking_Date=booking_date, booking_Status ="Booked")
         asset.save()
+
         messages.info(request, 'You have marked asset {} as booked!'.format(asset.asset_id))
     else:
         asset.is_available = True
