@@ -71,6 +71,7 @@ def uploadprofile(request):
             # profile=formp.save(commit=False)
             # profile.user=request.user
             # profile.save()
+            
             return redirect('account:viewprofile')
     else:
         formp = profileForm()
