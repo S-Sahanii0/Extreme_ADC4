@@ -1,0 +1,67 @@
+{% extends 'index.html' %}
+{% block content %}
+<p>
+    <a href="{% url 'booking:files' %}" class="btn btn-primary btn-sm">Upload</a>
+</p>
+
+{% if assets %}
+
+    
+    
+        {% for asset in assets %}
+        <p>
+            <b>Username:</b>{{asset.user.username}}
+            <br>
+            <b>Title:</b>{{asset.asset_Title}}
+            <br>
+            <b>Type:</b>{{asset.asset_Type}}
+            <br>
+            <b>Price:</b>{{asset.asset_Price}}
+            <br>
+            <b>Purpose:</b>{{asset.asset_purpose}}
+            <br>
+            <b>Location:</b>{{asset.asset_Location}}
+            <br>
+            <img src="{{asset.asset_Image.url}}" height="400" width="400">
+            <br>
+            <div>
+                <div><form method="POST" action="{% url 'booking:delete_asset' asset.pk %}">
+                {% csrf_token %}
+                <button style="position: relative; margin-left:50px;" type= "submit" class="btn btn-primary">Delete</button>
+            </form></div>
+                <div><form method="GET" action="{% url 'booking:update_asset' asset.pk %}">
+                {% csrf_token %}
+                <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Update</button></form></div>
+            <br></div>
+            {% if is_favorite %}
+            <div><form method="GET" action="{% url 'booking:fav_list' asset.pk %}">
+                {% csrf_token %}
+                <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Add to Fav</button></form>
+            {% else %}
+                <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Added to Fav</button></div>
+            {% endif %}
+            {% if asset.is_available %}
+            <div><form method="POST" action="{% url 'booking:book_asset' asset.pk %}">
+                {% csrf_token %}
+                <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Book</button></form>
+            {% else %}
+                <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Booked</button></div>
+            {% endif %}
+            <a href="{{asset.asset_Image.url}}">Download</a>
+            
+             
+        {% endfor %}
+        </p>
+</table>
+{% else %}
+
+<div class="container">
+    <div class="row">
+        <div class="card-title">
+            <h1>No results</h1>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endblock %}
