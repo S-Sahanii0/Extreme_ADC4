@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 class Asset(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     is_available=models.BooleanField(default=True)
+    is_favorite=models.BooleanField(default=True)
     asset_Title=models.CharField(max_length=50)
     asset_Type=models.CharField(max_length=20)
     asset_Price=models.IntegerField()
