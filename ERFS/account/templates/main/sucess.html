@@ -2,23 +2,25 @@
 {% extends "index.html" %}
 {% block content %}
 
-{% load staticfiles %}
+{% load static %}
 
 <div>
 {% if user.is_authenticated %}
 <h3 style="margin-left:10px;">Welcome {{request.user.username}} !!!</h3>
 {% endif %}
-<h2 style="position:relative; left:685px; ">Now You can buy and sell your property</h2>
+<h2 style="position:relative; text-align: center;  ">Now You can buy and sell your property</h2>
 </div>
 
 <style>
+  .carousel-inner{
+    margin: 0 auto;
+    width: 80%;
+  }
   /* Make the image fully responsive */
   .carousel-inner img {
       width:900 px;
       height: 650px;
       position: relative;
-      left:455px;
-      right:50px;
   }
 </style>
 
@@ -32,6 +34,7 @@
     </ul>
   
     <!-- The slideshow -->
+    <div class="content">    
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="{% static 'image/3.jpg' %}" >
@@ -43,6 +46,7 @@
         <img src="{% static 'image/1.jpg' %}" >
       </div>
     </div>
+  </div>
   
     <!-- Left and right controls -->
     <a class="carousel-control-prev"  href="#demo" data-slide="prev">

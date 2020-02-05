@@ -64,13 +64,13 @@ def uploadprofile(request):
     if request.method== "POST":
         formp = profileForm(request.POST,request.FILES)
         if formp.is_valid():
-            p =UserProfile.objects.get(user_id=request.user.id)
-            p.picture=formp.cleaned_data['picture']
-            p.bio=formp.cleaned_data['bio']
-            p.save()
-            #profile=formp.save(commit=False)
-            #profile.user=request.user
-            #profile.save()
+            # p =UserProfile.objects.get(user_id=request.user.id)
+            # p.picture=formp.cleaned_data['picture']
+            # p.bio=formp.cleaned_data['bio']
+            # p.save()
+            profile=formp.save(commit=False)
+            profile.user=request.user
+            profile.save()
             return redirect('account:viewprofile')
     else:
         formp = profileForm()
