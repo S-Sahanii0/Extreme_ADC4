@@ -1,15 +1,14 @@
 {% extends 'index.html' %}
 {% block content %}
+<h3 style="text-align: center;">Click to upload your assets.</h3>
 <p>
-    <a href="{% url 'booking:files' %}" class="btn btn-primary btn-sm">Upload</a>
+    <a href="{% url 'booking:files' %}" class="btn btn-info" style="position:absolute; left: 600px;">Upload</a>
 </p>
 
-{% if assets %}
 
-    
-    
+  {% if assets %}
         {% for asset in assets %}
-        <p>
+        <div>
             <b>Username:</b>{{asset.user.username}}
             <br>
             <b>Title:</b>{{asset.asset_Title}}
@@ -24,35 +23,37 @@
             <br>
             <img src="{{asset.asset_Image.url}}" height="400" width="400">
             <br>
+        </div>
+            
+         
+
             <div>
                 <div><form method="POST" action="{% url 'booking:delete_asset' asset.pk %}">
                 {% csrf_token %}
-                <button style="position: relative; margin-left:50px;" type= "submit" class="btn btn-primary">Delete</button>
-            </form></div>
+                <button style="position:absolute;left:10px;" type= "submit" class="btn btn-danger">Delete</button>
+                 </form>
+                 </div>
                 <div><form method="GET" action="{% url 'booking:update_asset' asset.pk %}">
-                {% csrf_token %}
-                <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Update</button></form></div>
-            <br></div>
-            {% if asset.is_favorite %}
-            <div><form method="GET" action="{% url 'booking:fav_list' asset.pk %}">
-                {% csrf_token %}
-                <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Add to Fav</button></form>
-            {% else %}
-                <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Added to Fav</button></div>
-            {% endif %}
-            {% if asset.is_available %}
-            <div><form method="POST" action="{% url 'booking:book_asset' asset.pk %}">
-                {% csrf_token %}
-                <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Book</button></form>
-            {% else %}
-                <button style="position: relative; margin-left:200px;" type="submit" class="btn btn-primary">Booked</button></div>
-            {% endif %}
-            <a href="{{asset.asset_Image.url}}">Download</a>
+                    {% csrf_token %}
+                <button style="position:absolute;left:100px;" type="submit" class="btn btn-primary">Update</button></form>
+                </div>
             
+                {% if asset.is_available %}
+               <div><form method="POST" action="{% url 'booking:book_asset' asset.pk %}">
+                {% csrf_token %}
+                <button style="position:absolute; left:200px;" type="submit" class="btn btn-primary">Book</button></form>
+                {% else %}
+                <button style="position:absolute;left:200px;" type="submit" class="btn btn-success">Booked</button>
+                {% endif %}
+                </div>
+                <div>
+                    <a href="{{asset.asset_Image.url}}" style="position:absolute; left:300px;">Download</a>
+                </div>
+            </div>
+           
              
         {% endfor %}
         </p>
-</table>
 {% else %}
 
 <div class="container">

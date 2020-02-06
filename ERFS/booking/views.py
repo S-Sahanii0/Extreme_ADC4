@@ -1,22 +1,27 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from .models import Asset,Booking, AddToFav
+from .models import Asset,Booking
 from account.models import UserProfile
 from .forms import UploadForm
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def upload(request):
-    form= UploadForm()
+    #form= UploadForm()
     if request.method == "POST":
         form= UploadForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-        return redirect('booking:display')       
-    return render(request, "uploads/upload.html", {"form": form})
-
+            asset=form.save(commit=False)
+            asset.user=request.user
+            asset.save()
+        return redirect('booking:display') 
+    else:      
+        form= UploadForm()
+        return render(request, "uploads/upload.html", {"form": form})
+@login_required
 def update_asset(request, id=None):
     instance= get_object_or_404(Asset, id=id)
     form= UploadForm()
@@ -31,37 +36,23 @@ def display(request):
     asset= Asset.objects.all()
     return render(request, "uploads/details.html",{"assets": asset})
 
+@login_required
 def delete_asset(request, pk= None):
     asset= Asset.objects.get(pk=pk)
     asset.delete()
     return redirect('booking:display')
 
-def fav_list(request,pk):
-    asset=get_object_or_404(Asset, pk=pk)
-    if asset.is_favorite:
-        asset.is_favorite =False
-        asset.save()
-        user= UserProfile.objects.get(user=request.user)
-        asset= Asset.objects.all()
-        AddToFav.objects.create(user=user, asset=asset)
-        return redirect('booking:display')
-    else:
-        asset.is_favorite=True
-        asset.save()
-
-def favorites(request):
-    fav=AddToFav.objects.all()
-    return render(request, "uploads/fav.html", {'fav':fav})
-    
-def book_asset(request,pk):
+@login_required 
+def book_asset(request,pk=None):
     asset = get_object_or_404(Asset, pk=pk)
     if asset.is_available:
         asset.is_available= False
         asset.save()
-        user= UserProfile.objects.get(user=request.user)
-        booking_date = timezone.now()
-        Booking.objects.create(user=user, booking_Date=booking_date, booking_Status ="Booked")
-        Booking.save()
+        b=Booking(user_id=request.user.id)
+        b.booking_Date=timezone.now()
+        b.asset_id=pk
+        b.booking_Status=True
+        b.save()
         return redirect('booking:display')
 
         #messages.info(request, 'You have marked asset {} as booked!'.format(asset.asset_id))
@@ -69,5 +60,6 @@ def book_asset(request,pk):
         asset.is_available = True
         asset.save()
         #messages.info(request, 'You have marked asset {} as available for booking'.format(asset.asset_id) )
+
     
 

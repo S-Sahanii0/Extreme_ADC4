@@ -4,4 +4,4 @@ from .models import Asset
 class UploadForm(forms.ModelForm):
     class Meta:
         model = Asset
-        fields = ('user','asset_Title', 'asset_Type', 'asset_Price', 'asset_purpose', 'asset_Location', 'asset_Image')
+        fields = ('asset_Title', 'asset_Type', 'asset_Price', 'asset_purpose', 'asset_Location', 'asset_Image')
