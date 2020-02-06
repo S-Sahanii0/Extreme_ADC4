@@ -61,6 +61,7 @@ def book_asset(request,pk):
         user= UserProfile.objects.get(user=request.user)
         booking_date = timezone.now()
         Booking.objects.create(user=user, booking_Date=booking_date, booking_Status ="Booked")
+        Booking.save()
         return redirect('booking:display')
 
         #messages.info(request, 'You have marked asset {} as booked!'.format(asset.asset_id))
