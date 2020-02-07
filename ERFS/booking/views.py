@@ -20,7 +20,7 @@ def upload(request):
         return redirect('booking:display') 
     else:      
         form= UploadForm()
-        return render(request, "uploads/upload.html", {"form": form})
+        return render(request, "uploads/uploads.html", {"form": form})
 @login_required
 def update_asset(request, id=None):
     instance= get_object_or_404(Asset, id=id)
@@ -62,4 +62,3 @@ def book_asset(request,pk=None):
         #messages.info(request, 'You have marked asset {} as available for booking'.format(asset.asset_id) )
 
     
-

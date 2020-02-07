@@ -10,11 +10,7 @@ urlpatterns=[
    path('api/', views.api_dataall, name="api_dataall"),
    path('api/<int:pk>', views.api_dataspecific, name="api_dataspecific"),
    path('api/add', views.api_dataadd, name="api_dataadd"),
-#    path('api/update/<int:pk>', views.api_update_data, name="api_update_data"),
-#    path('api/delete/<int:pk>', views.api_delete_data, name="api_delete_data"),
-#    path('api/page/<int:PAGENO>', views.api_food_pagination,
-#         name="api_food_pagination"),
-
-
-    
+   path('api/update/<int:pk>', views.api_dataupdate, name="api_dataupdate"),
+   path('api/delete/<int:pk>', views.api_datadelete, name="api_datadelete"),
+   path('api/page/<int:PAGENO>', views.api_assetpagination,name="api_assetpagination"),  
 ]
