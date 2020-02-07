@@ -8,7 +8,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-@login_required
+@login_required(login_url='account:userlogin')
 def upload(request):
     #form= UploadForm()
     if request.method == "POST":
@@ -21,7 +21,7 @@ def upload(request):
     else:      
         form= UploadForm()
         return render(request, "uploads/uploads.html", {"form": form})
-@login_required
+@login_required(login_url='account:userlogin')
 def update_asset(request, id=None):
     instance= get_object_or_404(Asset, id=id)
     form= UploadForm()
@@ -36,13 +36,14 @@ def display(request):
     asset= Asset.objects.all()
     return render(request, "uploads/details.html",{"assets": asset})
 
-@login_required
+@login_required(login_url='account:userlogin')
 def delete_asset(request, pk= None):
     asset= Asset.objects.get(pk=pk)
     asset.delete()
     return redirect('booking:display')
 
-@login_required 
+@login_required(login_url='account:userlogin')
+
 def book_asset(request,pk=None):
     asset = get_object_or_404(Asset, pk=pk)
     if asset.is_available:
